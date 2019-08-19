@@ -23,7 +23,6 @@ def recommendations(title):
     selected_movie_index = -1
     count = 0
     while count < len(movies['title']):
-        print(movies['title'][count])
         if movies['title'][count] == title:
             selected_movie_index = count
         count = count + 1
@@ -44,4 +43,4 @@ def recommendations(title):
     return recommended_movies
 
 
-print(recommendations('Harry Potter and the Half-Blood Prince'))
+print(recommendations((input("What is a movie that you have watched recently?"))))
