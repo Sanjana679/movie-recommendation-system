@@ -43,4 +43,4 @@ def recommendations(title):
     return recommended_movies
 
 
-print(recommendations((input("What is a movie that you have watched recently?"))))
+print(recommendations((input("What is a movie that you have watched recently? : "))))
