@@ -3,53 +3,31 @@ import string
 import gather
 from gather import movies
 
+miscellaneous = ['name', 'id', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+punctuation = ['[', ']', '{', '}', '"', ':', '(', ')', '\'\'']
+repeatable_punctuation = [', ,', '\'', ', ', ',,']
+
 #clean words for random punctuation, parentheses and replace commas with spaces
 def clean (column):
     count = 0
     while count < len(movies.index):
 
         if(column == 'keywords' or column == 'genres'):
-            movies[column][count] = movies[column][count].replace('name', '', -1)
-            movies[column][count] = movies[column][count].replace('id', '', -1)
-            movies[column][count] = movies[column][count].replace('1', '', -1)
-            movies[column][count] = movies[column][count].replace('2', '', -1)
-            movies[column][count] = movies[column][count].replace('3', '', -1)
-            movies[column][count] = movies[column][count].replace('4', '', -1)
-            movies[column][count] = movies[column][count].replace('5', '', -1)
-            movies[column][count] = movies[column][count].replace('6', '', -1)
-            movies[column][count] = movies[column][count].replace('7', '', -1)
-            movies[column][count] = movies[column][count].replace('8', '', -1)
-            movies[column][count] = movies[column][count].replace('9', '', -1)
-            movies[column][count] = movies[column][count].replace('0', '', -1)
+            for word in miscellaneous:
+                movies[column][count] = movies[column][count].replace(word, '', -1)
         
-        movies[column][count] = movies[column][count].replace('[', '', -1)
-        movies[column][count] = movies[column][count].replace(']', '', -1)
-        movies[column][count] = movies[column][count].replace('{', '', -1)
-        movies[column][count] = movies[column][count].replace('}', '', -1)
-        movies[column][count] = movies[column][count].replace('"', '', -1)
+        for punct in punctuation:
+            movies[column][count] = movies[column][count].replace(punct, '', -1)
 
-        movies[column][count] = movies[column][count].replace(':', '', -1)
-        movies[column][count] = movies[column][count].replace('(', '', -1)
-        movies[column][count] = movies[column][count].replace(')', '', -1)
-        movies[column][count] = movies[column][count].replace('\'\'', ', ', -1)
-
-        while movies[column][count].find(', ,') != -1:
-            movies[column][count] = movies[column][count].replace(', ,', ',', -1)
-
-        while movies[column][count].find('\'') != -1:
-            movies[column][count] = movies[column][count].replace('\'', '', -1)
-
-        while movies[column][count].find(', ') != -1:
-            movies[column][count] = movies[column][count].replace(', ', ',', -1)
-
-        while movies[column][count].find(',,') != -1:
-            movies[column][count] = movies[column][count].replace(',,', ',', -1)
-        
+        for repeat in repeatable_punctuation:
+            while movies[column][count].find(repeat) != -1:
+                movies[column][count] = movies[column][count].replace(repeat, ' ', -1)
+            
         if(column == 'important_words'):
             movies[column][count] = movies[column][count].replace(',', ' ', -1)
         
         movies[column][count] = str(movies[column][count])
-        
+
         count = count + 1
     return
 

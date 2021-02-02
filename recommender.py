@@ -17,6 +17,9 @@ indices[:5]
 # function that takes in movie title as input and returns the top 10 recommended movies
 def recommendations(title):
     
+    if(title == 'done'):
+        return "You have finished using the movie recommendation engine."
+
     recommended_movies = []
     
     # gettin the index of the movie that matches the title
@@ -44,5 +47,5 @@ def recommendations(title):
 
 answer = ''
 while answer != 'done':
-    answer = (input("What is a movie that you have watched recently? : "))
+    answer = (input("What is a movie that you have watched recently? (Enter done when you are finished): "))
     print(recommendations(answer))
